@@ -1,7 +1,5 @@
 package com.ladyrouge.LadyRouge.models;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
@@ -11,19 +9,18 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import lombok.Data;
+
 @Data
 @Entity
-@Table(name = "color", schema = "public")
-public class Color implements Serializable {
-
-    public static final long serialVersionUID = 1L;
-    
+@Table(name = "statusproducto", schema = "public")
+public class StatusProducto implements Serializable {
     @Id
-    @Column(name="color_id")
-    @GeneratedValue(generator = "color_id_seq")
-    @SequenceGenerator(name = "color_id_seq", sequenceName = "public.color_id_seq", allocationSize = 1)
-    private Long colorId;
-    
+    @Column(name="statusproducto_id")
+    @GeneratedValue(generator = "statusproducto_id_seq")
+    @SequenceGenerator(name = "statusproducto_id_seq", sequenceName = "public.statusproducto_id_seq", allocationSize = 1)
+    private Long statusProductoId;
+
     @Column(name="NOMBRE")
     private String nombre;
 
@@ -41,14 +38,13 @@ public class Color implements Serializable {
     @JsonIgnore
     private Set<Producto> productos;
 
-    public Color(String nombre, String descripcion){
+    public StatusProducto(String nombre, String descripcion){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.createdAt = new Date(System.currentTimeMillis());
         this.updatedAt = new Date(System.currentTimeMillis());
     }
 
-    public Color(){
+    public StatusProducto(){
     }
-
 }

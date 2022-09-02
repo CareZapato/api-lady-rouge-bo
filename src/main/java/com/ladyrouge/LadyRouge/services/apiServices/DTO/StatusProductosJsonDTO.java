@@ -3,7 +3,7 @@ package com.ladyrouge.LadyRouge.services.apiServices.DTO;
 import lombok.Data;
 
 @Data
-public class StatusProductsJsonDTO {
+public class StatusProductosJsonDTO {
     String nombre;
     String descripcion;
 }

@@ -8,6 +8,9 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Data
 @Entity
 @Table(name = "talla", schema = "public")
@@ -19,7 +22,7 @@ public class Talla implements Serializable {
     @Column(name="talla_id")
     @GeneratedValue(generator = "talla_id_seq")
     @SequenceGenerator(name = "talla_id_seq", sequenceName = "public.talla_id_seq", allocationSize = 1)
-    private int tallaId;
+    private Long tallaId;
     
     @Column(name="NOMBRE")
     private String nombre;
@@ -33,9 +36,10 @@ public class Talla implements Serializable {
     @Column(name="UPDATEDAT")
     private Date updatedAt;
 
-    @OneToMany(cascade= CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "product_id")
-    private Set<Product> products;
+    @OneToMany(cascade= CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id")
+    @JsonIgnore
+    private Set<Producto> productos;
 
     public Talla(String nombre, String descripcion){
         this.nombre = nombre;

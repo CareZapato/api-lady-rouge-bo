@@ -11,42 +11,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ladyrouge.LadyRouge.models.StatusProduct;
-import com.ladyrouge.LadyRouge.services.apiServices.StatusProductService;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.StatusProductsJsonDTO;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarStatusProductsResponse;
+import com.ladyrouge.LadyRouge.models.StatusProducto;
+import com.ladyrouge.LadyRouge.services.apiServices.StatusProductoService;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.StatusProductosJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarStatusProductosResponse;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/statusProduct")
+@RequestMapping("/statusProducto")
 @RequiredArgsConstructor
 @CrossOrigin
 public class StatusProductController {
 
-    private final StatusProductService statusProductService;
+    private final StatusProductoService statusProductoService;
 
-    @GetMapping("/statusProducts")
-	public ResponseEntity<Iterable<StatusProduct>> statusProducts() {
-		return new ResponseEntity<Iterable<StatusProduct>>(statusProductService.listaStatusProducts(), HttpStatus.OK);
+    @GetMapping("/statusProductos")
+	public ResponseEntity<Iterable<StatusProducto>> statusProductos() {
+		return new ResponseEntity<Iterable<StatusProducto>>(statusProductoService.listaStatusProductos(), HttpStatus.OK);
 	}
 
-	@GetMapping("/statusProducts/{statusProductNombre}")
-	public ResponseEntity<Iterable<StatusProduct>> colorNombre(
-		@PathVariable String statusProductNombre
+	@GetMapping("/statusProductos/{statusProductoNombre}")
+	public ResponseEntity<Iterable<StatusProducto>> colorNombre(
+		@PathVariable String statusProductoNombre
 	) {
-		return new ResponseEntity<Iterable<StatusProduct>>(statusProductService.findByNombre(statusProductNombre), HttpStatus.OK);
+		return new ResponseEntity<Iterable<StatusProducto>>(statusProductoService.findByNombre(statusProductoNombre), HttpStatus.OK);
 	}
 
-	@PostMapping("/insertarStatusProducts")
-	public ResponseEntity<InsertarStatusProductsResponse> insertarstatusProducts(
-		@RequestBody Iterable<StatusProductsJsonDTO> statusProductsJsonDTO
+	@PostMapping("/insertarStatusProductos")
+	public ResponseEntity<InsertarStatusProductosResponse> insertarstatusProductos(
+		@RequestBody Iterable<StatusProductosJsonDTO> statusProductosJsonDTO
 	) {
-		return new ResponseEntity<InsertarStatusProductsResponse>(statusProductService.insertarStatusProducts(statusProductsJsonDTO), HttpStatus.OK);
+		return new ResponseEntity<InsertarStatusProductosResponse>(statusProductoService.insertarStatusProductos(statusProductosJsonDTO), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/eliminarStatusProducts")
-	public ResponseEntity<InsertarStatusProductsResponse> eliminarStatusProducts() {
-		return new ResponseEntity<InsertarStatusProductsResponse>(statusProductService.eliminarStatusProducts(), HttpStatus.OK);
+	@DeleteMapping("/eliminarStatusProductos")
+	public ResponseEntity<InsertarStatusProductosResponse> eliminarStatusProductos() {
+		return new ResponseEntity<InsertarStatusProductosResponse>(statusProductoService.eliminarStatusProductos(), HttpStatus.OK);
 	}
 }
