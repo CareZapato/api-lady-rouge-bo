@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Iterables;
 import com.ladyrouge.LadyRouge.models.Talla;
 import com.ladyrouge.LadyRouge.repositories.TallaRepository;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarTallasResponse;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.TallasJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Talla.InsertarTallasResponse;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Talla.TallasJsonDTO;
+
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @Transactional
+@Log4j2
 public class TallaService {
 
     @Autowired
@@ -44,6 +47,7 @@ public class TallaService {
                 catch(Exception e){
                     response.setResponse("Error al insertar tallas");
                     response.setError(e.toString());
+                    log.error("[TallaService][insertarTallas] - Error al insertar tallas");
                     return response;
                 }
             }else{
@@ -60,10 +64,11 @@ public class TallaService {
             Long cant = tallaRepository.count();
             tallaRepository.deleteAll();
             response.setEliminados(cant);
-            response.setResponse("Se eliminaron todos las tallas de la Base de datos");
+            response.setResponse("Se eliminaron todas las tallas de la Base de datos");
         }catch(Exception e){
-            response.setResponse("Error al insertar tallas");
+            response.setResponse("Error al eliminar tallas");
             response.setError(e.toString());
+            log.error("[TallaService][eliminarTallas] - Error al eliminar tallas");
             return response;
         }
         return response;

@@ -13,21 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ladyrouge.LadyRouge.models.Color;
 import com.ladyrouge.LadyRouge.services.apiServices.ColorService;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.ColoresJsonDTO;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarColoresResponse;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Color.ColoresJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Color.InsertarColoresResponse;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/color")
 @RequiredArgsConstructor
 @CrossOrigin
+@Log4j2
 public class ColorController {
 
     private final ColorService colorService;
 
     @GetMapping("/colores")
 	public ResponseEntity<Iterable<Color>> colores() {
+		log.info("[ColorController][colores]");
 		return new ResponseEntity<Iterable<Color>>(colorService.listaColores(), HttpStatus.OK);
 	}
 
@@ -35,6 +38,7 @@ public class ColorController {
 	public ResponseEntity<Iterable<Color>> colorNombre(
 		@PathVariable String colorNombre
 	) {
+		log.info("[ColorController][colorNombre]");
 		return new ResponseEntity<Iterable<Color>>(colorService.findByNombre(colorNombre), HttpStatus.OK);
 	}
 
@@ -42,11 +46,13 @@ public class ColorController {
 	public ResponseEntity<InsertarColoresResponse> insertarColores(
 		@RequestBody Iterable<ColoresJsonDTO> coloresJsonDTO
 	) {
+		log.info("[ColorController][insertarColores]");
 		return new ResponseEntity<InsertarColoresResponse>(colorService.insertarColores(coloresJsonDTO), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/eliminarColores")
 	public ResponseEntity<InsertarColoresResponse> eliminarColores() {
+		log.info("[ColorController][eliminarColores]");
 		return new ResponseEntity<InsertarColoresResponse>(colorService.eliminarColores(), HttpStatus.OK);
 	}
 }

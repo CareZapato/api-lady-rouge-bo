@@ -1,5 +1,5 @@
 package com.ladyrouge.LadyRouge.repositories;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.ladyrouge.LadyRouge.models.Color;
@@ -8,7 +8,7 @@ import com.ladyrouge.LadyRouge.models.Color;
  * This is the same as the above except it is using the CrudRepository interface instead of the interface above.
  */
 @Repository
-public interface ColorRepository extends CrudRepository<Color, Long> {
+public interface ColorRepository extends JpaRepository<Color, Long> {
     
     public Iterable<Color> findByNombre(String nombre);
 }

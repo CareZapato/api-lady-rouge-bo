@@ -1,6 +1,5 @@
 package com.ladyrouge.LadyRouge.services.apiServices;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Iterables;
 import com.ladyrouge.LadyRouge.models.Color;
 import com.ladyrouge.LadyRouge.repositories.ColorRepository;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.ColoresJsonDTO;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarColoresResponse;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Color.ColoresJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Color.InsertarColoresResponse;
+
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @Transactional
+@Log4j2
 public class ColorService {
 
     @Autowired
@@ -45,6 +47,7 @@ public class ColorService {
                 catch(Exception e){
                     response.setResponse("Error al insertar colores");
                     response.setError(e.toString());
+                    log.error("[ColorService][insertarColores] - Error al insertar colores");
                     return response;
                 }
             }else{
@@ -63,8 +66,9 @@ public class ColorService {
             response.setEliminados(cant);
             response.setResponse("Se eliminaron todos los colores de la Base de datos");
         }catch(Exception e){
-            response.setResponse("Error al insertar colores");
+            response.setResponse("Error al eliminar colores");
             response.setError(e.toString());
+            log.error("[ColorService][eliminarColores] - Error al eliminar colores");
             return response;
         }
         return response;

@@ -2,13 +2,8 @@ package com.ladyrouge.LadyRouge.models;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Optional;
-import java.util.Set;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -38,19 +33,19 @@ public class Producto implements Serializable {
     private Boolean activado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="talla_id")
+    @JoinColumn(name= "talla_id", referencedColumnName="talla_id")
     private Talla talla;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="statusproducto_id")
+    @JoinColumn(name= "statusproducto_id", referencedColumnName="statusproducto_id")
     private StatusProducto statusproducto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="categoria_id")
+    @JoinColumn(name= "categoria_id", referencedColumnName="categoria_id")
     private Categoria categoria;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="color_id")
+    @JoinColumn(name= "color_id", referencedColumnName="color_id")
     private Color color;
 
     @Column(name="CREATEDAT")

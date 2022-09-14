@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Iterables;
 import com.ladyrouge.LadyRouge.models.Categoria;
 import com.ladyrouge.LadyRouge.repositories.CategoriaRepository;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarCategoriasResponse;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.CategoriasJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Categoria.CategoriasJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.Categoria.InsertarCategoriasResponse;
+
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @Transactional
+@Log4j2
 public class CategoriaService {
 
     @Autowired
@@ -44,6 +47,7 @@ public class CategoriaService {
                 catch(Exception e){
                     response.setResponse("Error al insertar categorias");
                     response.setError(e.toString());
+                    log.error("[CategoriaService][insertarCategorias] - Error al insertar categorias");
                     return response;
                 }
             }else{
@@ -62,8 +66,9 @@ public class CategoriaService {
             response.setEliminados(cant);
             response.setResponse("Se eliminaron todos las categorias de la Base de datos");
         }catch(Exception e){
-            response.setResponse("Error al insertar categorias");
+            response.setResponse("Error al eliminar categorias");
             response.setError(e.toString());
+            log.error("[CategoriaService][eliminarCategorias] - Error al eliminar categorias");
             return response;
         }
         return response;

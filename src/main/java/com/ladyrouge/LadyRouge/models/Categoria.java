@@ -4,12 +4,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
 @Entity
@@ -38,11 +34,6 @@ public class Categoria implements Serializable {
 
     @Column(name="UPDATEDAT")
     private Date updatedAt;
-
-    @OneToMany(cascade= CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
-    @JsonIgnore
-    private Set<Producto> productos;
 
     public Categoria(String nombre, String descripcion){
         this.nombre = nombre;

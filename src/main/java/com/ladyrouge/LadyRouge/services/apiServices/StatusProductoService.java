@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Iterables;
 import com.ladyrouge.LadyRouge.models.StatusProducto;
 import com.ladyrouge.LadyRouge.repositories.StatusProductoRepository;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.InsertarStatusProductosResponse;
-import com.ladyrouge.LadyRouge.services.apiServices.DTO.StatusProductosJsonDTO;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.StatusProducto.InsertarStatusProductosResponse;
+import com.ladyrouge.LadyRouge.services.apiServices.DTO.StatusProducto.StatusProductosJsonDTO;
+
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @Transactional
+@Log4j2
 public class StatusProductoService {
 
     @Autowired
@@ -44,6 +47,7 @@ public class StatusProductoService {
                 catch(Exception e){
                     response.setResponse("Error al insertar statusProductos");
                     response.setError(e.toString());
+                    log.error("[StatusProductoService][insertarStatusProductos] - Error al insertar statusProductos");
                     return response;
                 }
             }else{
@@ -62,8 +66,9 @@ public class StatusProductoService {
             response.setEliminados(cant);
             response.setResponse("Se eliminaron todos las statusProductos de la Base de datos");
         }catch(Exception e){
-            response.setResponse("Error al insertar statusProductos");
+            response.setResponse("Error al eliminar statusProductos");
             response.setError(e.toString());
+            log.error("[StatusProductoService][eliminarStatusProductos] - Error al eliminar statusProductos");
             return response;
         }
         return response;
